@@ -12,6 +12,7 @@ export const NavigationWrapper = styled.nav`
   justify-content: space-around;
   align-items: center;
   background-color: var(--background-foreground);
+  
 `;
 
 export const NavigationList = styled.ul`
@@ -33,4 +34,8 @@ export const NavigationLink = styled(Link)`
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
+
+  &:hover{
+    color: var(--color-accent);
+  }
 `;
