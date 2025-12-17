@@ -1,7 +1,14 @@
-export default function MyPlantsPage(){
+import useSWR from "swr"
 
-    
+export default function MyPlantsPage(){
+    const { data: myPlantstData } = useSWR("/api/plats");
+
+
     return(
-        <h1>My Plants</h1>
+        <>
+                <h1>My Plants</h1>
+
+        </>
+        
     )
 }
