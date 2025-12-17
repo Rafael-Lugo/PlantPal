@@ -11,7 +11,7 @@ export const NavigationWrapper = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--background);
+  background-color: var(--background-foreground);
 `;
 
 export const NavigationList = styled.ul`

@@ -7,7 +7,12 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+   :root{
+    --background: #fff;
+    --background-foreground: #949494ff;
+  }
+
+   body {
     margin: 0;
     font-family: system-ui;
   }
