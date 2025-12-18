@@ -1,4 +1,3 @@
-import PlantList from "@/components/Plantlist/PlantList";
 import useSWR from "swr";
 
 export default function MyPlantsPage() {
@@ -10,7 +9,7 @@ export default function MyPlantsPage() {
   return (
     <main>
       <h1>My Plants</h1>
-      <PlantList plants={data} />
+      
     </main>
   );
 }
