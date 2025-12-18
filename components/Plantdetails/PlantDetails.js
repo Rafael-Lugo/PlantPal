@@ -1,5 +1,3 @@
-export default funcction PlantDetails(){
-    return(
-        
-    )
+export default function PlantDetails(){
+    return <main>...</main>
 }
