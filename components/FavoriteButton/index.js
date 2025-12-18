@@ -1,10 +1,13 @@
-export default function FavoriteButton({ _id, isFavorite, toggleFavorite }) {
+import FavoriteIcon from "../../assets/icons/leaf.svg";
+
+export default function FavoriteButton({ isFavorite, onToggle }) {
   return (
     <button
       type="button"
-      onClick={() => toggleFavorite(_id)}
+      onClick={onToggle}
       aria-label={isFavorite ? "unlike" : "like"}
-      $isFavorite={isFavorite}
-    ></button>
+    >
+      <FavoriteIcon width={28} height={28} />
+    </button>
   );
 }
