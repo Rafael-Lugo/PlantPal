@@ -24,6 +24,15 @@ export default function PlantDetailPage() {
     );
   }
 
+  async function handleDelete() {
+    const response = await fetch(`/api/plants/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok){
+      router.push("/");
+    }
+  }
+
   return (
     <>
       <h1>{plant.name}</h1>
@@ -33,6 +42,7 @@ export default function PlantDetailPage() {
         <li>{plant.waterNeed}</li>
         <li>{plant.lightNeed}</li>
       </ul>
+      <button type="button" onClick={handleDelete}>Delete</button>
     </>
   );
 }
