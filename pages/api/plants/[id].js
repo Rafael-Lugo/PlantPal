@@ -14,4 +14,9 @@ export default async function handler(request, response){
         response.status(200).json(plant);
         return;
     }
+
+    if(request.method === "DELETE"){
+        await Plant.findByIdAndDelete(id);
+        response.status(200).json({ status: `Joke ${id} succesfully deleted`});
+    }
 }
