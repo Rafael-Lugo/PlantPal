@@ -78,12 +78,19 @@ export const CardTitle = styled.h2`
 margin: 0;
 font-size: 1.5rem;
 font-weight: 700;
+
+color: var(--color);
+text-decoration: none;
+
 `
 
 export const CardSubtitle = styled.p`
 margin: 6px 0 0;
 font-size: 1rem;
 font-weight: 400;
+text-decoration: none;
+
+color: var(--color);
 `
 
 export const BookmarkWrapper = styled.div`
