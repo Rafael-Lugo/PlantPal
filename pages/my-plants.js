@@ -1,4 +1,5 @@
 import PlantList from "@/components/Plantlist/PlantList";
+import { Subtitle, Titel } from "@/styles";
 import useSWR from "swr";
 
 export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
@@ -13,9 +14,9 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
 
   return (
     <main>
-      <h1>My Plants</h1>
+      <Titel>My Plants</Titel>
       {favoritePlants.length === 0 ? (
-        <p>no favorites yet</p>
+        <Subtitle>no favorites yet</Subtitle>
       ) : (
         <PlantList
           plants={favoritePlants}

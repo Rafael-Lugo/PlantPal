@@ -8,7 +8,7 @@ export default function PlantList({
 }) {
   return (
     <PlantListWrapper>
-      <h2>Plant list</h2>
+      <TitelPage>Plant list</TitelPage>
       {plants.map((plant) => (
         <PlantListItem key={plant._id}>
           <PlantCard
@@ -24,12 +24,14 @@ export default function PlantList({
 }
 
 
-export const PlantListWrapper = styled.section`
+export const PlantListWrapper = styled.ul`
 display: grid;
-gap: 18px;
-padding: 18px;
+gap: 5px;
+padding: 0;
+margin: 0;
 grid-template-columns: 1fr;
 list-style: none;
+justify-content: center;
 
 background: var(--background);
 color: var(--color);
@@ -42,10 +44,25 @@ color: var(--color);
 @media (min-width: 900px) {
   grid-template-columns: repeat(3, 1fr);
 }
+
+@media (min-width: 1200px) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (min-width: 2000px) {
+  grid-template-columns: repeat(5, 1fr);
+}
 `
+
 
 const PlantListItem = styled.li`
 list-style: none;
 margin: 0;
 padding: 0;
+`
+
+export const TitelPage = styled.h2`
+background-color: var(--background);
+text-align: center;
+grid-column: 1 / -1;
 `

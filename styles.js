@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { Exo } from "next/font/google";
 
 export const exo = Exo({
@@ -26,6 +26,19 @@ export default createGlobalStyle`
    body {
     margin: 0;
     font-family: ${exo.style.fontFamily};
+    background: var(--background);
   }
-
+ 
 `;
+
+export const Titel = styled.h1`
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  `
+
+  export const Subtitle = styled.h2`
+    text-align: center;
+    font-size: 1%.69;
+    font-weight: 400;
+  `

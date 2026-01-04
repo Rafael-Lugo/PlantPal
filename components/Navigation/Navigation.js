@@ -18,21 +18,21 @@ export default function Navigation() {
     <NavigationWrapper>
       <NavigationList>
         <NavigationItem>
-          <NavigationLink href="/reminder">
+          <NavigationLink href="/reminder" $highlighted={router.pathname === "/reminder"}>
           <Reminder width={52} height={52} />
           </NavigationLink>
           
         </NavigationItem>
 
         <NavigationItem>
-          <NavigationLink href="/">
+          <NavigationLink href="/" $highlighted={router.pathname === "/"}>
           <Home width={52} height={52} />
           
           </NavigationLink>
         </NavigationItem>
 
         <NavigationItem>
-          <NavigationLink href="/my-plants">
+          <NavigationLink href="/my-plants" $highlighted={router.pathname === "/my-plants"}>
           <Myplant width={52} height={52} />
           </NavigationLink>
         </NavigationItem>

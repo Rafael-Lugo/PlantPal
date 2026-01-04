@@ -2,6 +2,7 @@ import PlantList from "@/components/Plantlist/PlantList";
 import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
+import { Titel } from "@/styles";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -16,7 +17,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
 
   return (
     <div>
-      <h1>Plantpal App</h1>
+      <Titel>Plantpal App</Titel>
       <SearchBar search={search} setSearch={setSearch}
       />
       <PlantList

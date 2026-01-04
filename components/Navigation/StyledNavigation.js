@@ -12,7 +12,7 @@ export const NavigationWrapper = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(to top, var(--background-foreground) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to top, var(--background) 75%, rgba(0, 0, 0, 0) 100%);
   padding: 1rem 0;
     
 `;
@@ -41,7 +41,11 @@ export const NavigationLink = styled(Link)`
   font-size: 1rem;
   font-weight: 500;
 
-  &:hover{
-    color: var(--color-accent);
+    svg path{
+    fill: ${({ $highlighted }) => ($highlighted ? "var(--accent)" : "var(--primary)")};
+    }
+
+  &:hover svg path {
+    fill: var(--accent);
   }
 `;
