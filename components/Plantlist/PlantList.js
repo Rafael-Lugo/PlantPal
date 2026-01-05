@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import PlantCard from "./PlantCard";
 
 export default function PlantList({
@@ -6,18 +7,63 @@ export default function PlantList({
   toggleFavorite,
 }) {
   return (
-    <ul>
-      <h2>Plant list</h2>
+    <PlantListWrapper>
+      <TitelPage>Plant list</TitelPage>
       {plants.map((plant) => (
-        <li key={plant._id}>
+        <PlantListItem key={plant._id}>
           <PlantCard
             plant={plant}
             imageUrl={plant.imageUrl}
             isFavorite={favoritePlantIds.includes(plant._id)}
             toggleFavorite={toggleFavorite}
           />
-        </li>
+        </PlantListItem>
       ))}
-    </ul>
+    </PlantListWrapper>
   );
 }
+
+
+export const PlantListWrapper = styled.ul`
+display: grid;
+gap: 5px;
+padding: 0;
+margin: 0;
+margin-bottom: 6rem;
+grid-template-columns: 1fr;
+list-style: none;
+justify-content: center;
+
+background: var(--background);
+color: var(--color);
+
+
+@media (min-width: 520px) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 900px) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 1200px) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (min-width: 2000px) {
+  grid-template-columns: repeat(5, 1fr);
+}
+`
+
+
+const PlantListItem = styled.li`
+list-style: none;
+margin: 0;
+padding: 0;
+`
+
+export const TitelPage = styled.h2`
+background-color: var(--background);
+text-align: center;
+grid-column: 1 / -1;
+`

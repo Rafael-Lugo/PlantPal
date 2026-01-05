@@ -1,4 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import { Exo } from "next/font/google";
+
+export const exo = Exo({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default createGlobalStyle`
   *,
@@ -8,15 +14,32 @@ export default createGlobalStyle`
   }
 
    :root{
-    --background: #fff;
-    --background-foreground: #949494ff;
-    --color: #000000ff;
-    --color-primary: #3a3a3aff;
-    --color-accent: #922d2dff;
+    --background: #FCFBEC;
+    --background-foreground: #b2d024;
+    --background-ground: #fdfdf9ff;
+    --color: #003333;
+    --primary: #5F7B02;
+    --accent: #14ddce;
+    --secondary: #096830;
+    --terciary: #99CC99
   }
 
    body {
     margin: 0;
-    font-family: system-ui;
+    font-family: ${exo.style.fontFamily};
+    background: var(--background);
   }
+ 
 `;
+
+export const Titel = styled.h1`
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  `
+
+  export const Subtitle = styled.h2`
+    text-align: center;
+    font-size: 1.69rem;
+    font-weight: 400;
+  `
