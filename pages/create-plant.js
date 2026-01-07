@@ -5,6 +5,8 @@ import useSWR from "swr";
 export default function CreatePlantPage() {
   const router = useRouter();
   const { mutate } = useSWR("/api/plants");
+  const { data: options, isLoading: optionsLoading } =
+    useSWR("/api/plant-options");
 
   async function handleCreatePlant(plantData) {
     const response = await fetch("/api/plants", {
@@ -16,16 +18,21 @@ export default function CreatePlantPage() {
     if (response.ok) {
       await mutate();
       router.push("/");
-    } else {
-      const errorData = await response.json().catch(() => ({}));
-      console.error("Create failed:", errorData);
+      return;
     }
+
+    const errorData = await response.json().catch(() => ({}));
+    console.error("Create failed:", errorData);
+  }
+
+  if (optionsLoading) {
+    return <p>Loading...</p>;
   }
 
   return (
     <main>
       <h1>Create Plant</h1>
-      <PlantForm onSubmit={handleCreatePlant} />
+      <PlantForm onSubmit={handleCreatePlant} options={options} />
     </main>
   );
 }
