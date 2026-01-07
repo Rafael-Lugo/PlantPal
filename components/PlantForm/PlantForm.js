@@ -1,15 +1,68 @@
+import { useState } from "react";
 import { PlantFormWrapper } from "./PlantFormStyled";
 
 export default function PlantForm({ onSubmit, options }) {
+   const [selectedFile, setSelectedFile] = useState(null);
+  const [submitError, setSubmitError] = useState("");
+
+  
+
   async function handleSubmit(event) {
     event.preventDefault();
+    setSubmitError("");
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const fertiliserSeason = formData.getAll("fertiliserSeason");
-    const plantData = { ...data, fertiliserSeason };
 
-    onSubmit(plantData);
+    const data = Object.fromEntries(formData);
+
+    const fertiliserSeason = formData.getAll("fertiliserSeason");
+
+    if (
+      !data.name ||
+      !data.botanicalName ||
+      !data.lightNeed ||
+      !data.waterNeed
+    ) {
+      setError("please fill all required fields");
+      return;
+    }
+
+    if (!fertiliserSeason.length) {
+      setSubmitError("Please select at least one fertiliser season.");
+      return;
+    }
+    
+     const plantData = {
+      ...data,
+      fertiliserSeason,
+    };
+
+    if (selectedFile) {
+      const uploadFormData = new FormData();
+      uploadFormData.append("image", selectedFile);
+
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadFormData,
+      });
+
+      if (!uploadResponse.ok) {
+        setSubmitError("Image upload failed");
+        return;
+      }
+
+      const uploadResult = await uploadResponse.json();
+
+
+      plantData.imageUrl = {
+        url: uploadResult.url,
+        width: String(uploadResult.width),
+        height: String(uploadResult.height),
+        public_id: uploadResult.publicId,
+      };
+    }
+
+     onSubmit(plantData);
   }
 
   const lightNeeds = options?.lightNeeds ?? [];
@@ -18,10 +71,15 @@ export default function PlantForm({ onSubmit, options }) {
 
   return (
     <PlantFormWrapper onSubmit={handleSubmit}>
+      
       <label>
-        {" "}
         Image
-        <input name="imageUrl" />
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(event) => setSelectedFile(event.target.files?.[0] ?? null)}
+        />
       </label>
 
       <label>
@@ -46,7 +104,7 @@ export default function PlantForm({ onSubmit, options }) {
         ))}
       </fieldset>
 
-       <fieldset>
+      <fieldset>
         <legend>Water needs *</legend>
         {waterNeeds.map((need) => (
           <label key={need}>
@@ -56,7 +114,7 @@ export default function PlantForm({ onSubmit, options }) {
         ))}
       </fieldset>
 
-       <fieldset>
+      <fieldset>
         <legend>Fertiliser season *</legend>
         {seasons.map((season) => (
           <label key={season}>
@@ -66,7 +124,7 @@ export default function PlantForm({ onSubmit, options }) {
         ))}
       </fieldset>
 
-      
+      {submitError ? <p role="alert">{submitError}</p> : null}
 
       <button type="submit">Create plant</button>
     </PlantFormWrapper>
