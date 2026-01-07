@@ -1,3 +1,6 @@
+import styled from "styled-components";
+import { PlantFormWrapper } from "./PlantFormStyled";
+
 export default function PlantForm({ onSubmit }) {
   async function handleSubmit(event) {
     event.preventDefault();
@@ -9,7 +12,7 @@ export default function PlantForm({ onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <PlantFormWrapper onSubmit={handleSubmit}>
       <label>
         {" "}
         Image
@@ -42,6 +45,8 @@ export default function PlantForm({ onSubmit }) {
  
 
       <button type="submit">Create plant</button>
-    </form>
+    </PlantFormWrapper>
   );
 }
+
+
