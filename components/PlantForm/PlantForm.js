@@ -7,9 +7,29 @@ export default function PlantForm({ onSubmit, options }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const fertiliserSeason = formData.getAll("fertiliserSeason");
+    const file =formData.get("imageUrl");
     const plantData = { ...data, fertiliserSeason };
 
-    const response = await fetch("/api/upload", { method: "POST", body: formData});
+    if (file && file.name){
+      const uploadFormData = new FormData();
+      uploadFormData.append("imageUrl", file);
+
+      const uploadResponse = await fetch("/api/upload", { method: "POST", body: uploadFormData});
+
+      if (!uploadResponse.ok) { 
+        const error = await uploadResponse.json().catch(() => ({}));
+        console.error("Image upload failed:", error.message);
+        return;
+      }
+
+      const result = await uploadResponse.json();
+
+      plantData.imageUrl = {
+        url: result.secure_url,
+        publicId: result.public_id,
+
+      };
+    }
 
     onSubmit(plantData);
   }
@@ -21,9 +41,8 @@ export default function PlantForm({ onSubmit, options }) {
   return (
     <PlantFormWrapper onSubmit={handleSubmit}>
       <label>
-        {" "}
         Image
-        <input name="imageUrl" />
+        <input type="file" name="imageUrl" accept="imageUrl/*" />
       </label>
 
       <label>
