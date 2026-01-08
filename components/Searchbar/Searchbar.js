@@ -16,6 +16,7 @@ export default function SearchBar({ search, setSearch }){
       <button type="button" onClick={() => handleSearch("")}>
         remove
       </button>
+      
         </SearchBarWrapper>
     )
 }
@@ -23,7 +24,8 @@ export default function SearchBar({ search, setSearch }){
 export const SearchBarWrapper = styled.div`
   display: flex;
   align-items: start;
-  background-color: var(--primary);`
+  background-color: var(--primary);
+  transform: translateX(20%);`
 
   export const SearchInput = styled.input`
   border: 1px solid var(--primary);

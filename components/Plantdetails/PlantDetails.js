@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getWaterIconSrc, getLightIconSrc } from "../Icons/optionIcons";
+import Image from "next/image";
 
 
 export default function PlantDetails({ plant, onEdit, onDelete }) {
@@ -19,10 +20,11 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
     <>
       <h1>{plant.name}</h1>
       <p>{plant.botanicalName}</p>
-      <img
+      <Image
+      width={600}
+      height={600}
         src={plant.imageUrl?.url || plant.imageUrl}
-        alt={plant.name}
-        height={300}
+        alt={plant.name}        
       />
 
       {!isEditing ? (
@@ -31,7 +33,7 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
           <ul>
             <li>Water needs:
               {water_Icon && (
-                <img
+                <Image 
                   src={water_Icon}
                   alt={`Water: ${plant.waterNeed}`}
                   width={32}
@@ -43,7 +45,7 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
 
             <li>Light needs: 
               {light_Icon && (
-                <img
+                <Image
                   src={light_Icon}
                   alt={`Light: ${plant.lightNeed}`}
                   width={32}
