@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import Search from "public/assets/icons/Search.svg";
 import { useRef } from "react";
+
+import Close from "public/assets/icons/Close.svg";
+import Search from "public/assets/icons/Search.svg";
 
 export default function SearchBar({
   search,
@@ -8,20 +10,19 @@ export default function SearchBar({
   isMenuActive,
   setIsMenuActive,
 }) {
-
   const inputRef = useRef(null);
 
   function toggleSearch() {
     setIsMenuActive((prev) => !prev);
   }
 
-   function handleRemove() {
+  function handleRemove() {
     setSearch("");
     inputRef.current?.focus();
   }
 
   return (
- <SearchContainer>
+    <SearchContainer>
       <Viewport>
         <Bar $isOpen={isMenuActive}>
           <SearchInput
@@ -32,7 +33,7 @@ export default function SearchBar({
             onChange={(event) => setSearch(event.target.value)}
             $isOpen={isMenuActive}
           />
-        <RemoveButton
+          <RemoveButton
             type="button"
             onClick={handleRemove}
             $isOpen={isMenuActive}
@@ -41,13 +42,17 @@ export default function SearchBar({
             remove
           </RemoveButton>
 
-            <IconButton
-            type="button"
-            aria-label="Toggle search"
-            onClick={toggleSearch}
-          >
-          <Search alt="search" width={42} height={42} />
-        </IconButton>
+          <IconButton
+  type="button"
+  aria-label="Toggle search"
+  onClick={toggleSearch}
+>
+  {isMenuActive ? (
+    <Close alt="Close search" width={48} height={48} />
+  ) : (
+    <Search alt="Open search" width={48} height={48} />
+  )}
+</IconButton>
         </Bar>
       </Viewport>
     </SearchContainer>
@@ -90,7 +95,6 @@ const Bar = styled.div`
   will-change: transform;
 `;
 
-
 const SearchInput = styled.input`
   flex: 1;
   height: 48px;
@@ -100,14 +104,14 @@ const SearchInput = styled.input`
   padding: 0 16px;
 
   background: var(--background-ground);
-   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
+  pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
 `;
 
 const IconButton = styled.button`
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  
+
   border: none;
   background: transparent;
 
@@ -117,29 +121,36 @@ const IconButton = styled.button`
   margin-left: 12px;
   cursor: pointer;
 
-  svg{
+  svg {
     fill: var(--background-foreground);
 
-    &:hover{
+    &:hover {
       fill: var(--accent);
-
+      
     }
+  }
 
-  
+  svg path{
+    fill: var(--background-foreground);
+    
+
+    &:hover {
+      fill: var(--accent);
+      
+    }
   }
 `;
 
 const RemoveButton = styled.button`
-  height: 48px;
+  height: 35px;
   border-radius: 16px;
   border: none;
   padding: 0 16px;
 
-  background: rgba(255, 255, 255, 0.6);
+  color: var(--background-foreground);
+  background: var(--color);
 
   margin-left: 12px;
 
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
 `;
-
-
