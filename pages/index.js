@@ -20,11 +20,15 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   return (
     <div>
       <Titel>Plantpal App</Titel>
-      <button type="button" onClick={() => setIsMenuActive((p)=> !p)}>Search</button>
-      <SearchBar search={search} setSearch={setSearch} isMenuActive={isMenuActive} />
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        isMenuActive={isMenuActive}
+        setIsMenuActive={setIsMenuActive}
+      />
 
       <CreatePlantButton />
-      
+
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}
@@ -32,4 +36,4 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
       />
     </div>
   );
-} 
+}
