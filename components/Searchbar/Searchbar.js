@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export default function SearchBar({ search, setSearch }){
-    function handleSearch(searchString){
-        setSearch(searchString);
-    }
+export default function SearchBar({ search, setSearch, isMenuActive }) {
+  function handleSearch(searchString) {
+    setSearch(searchString);
+  }
 
-    return(
-        <SearchBarWrapper>
-         <SearchInput
+  return (
+    <SearchBarWrapper $isMenuActive={isMenuActive}>
+      <SearchInput
         type="search"
         placeholder="Search plants..."
         value={search}
@@ -16,18 +16,26 @@ export default function SearchBar({ search, setSearch }){
       <button type="button" onClick={() => handleSearch("")}>
         remove
       </button>
-      
-        </SearchBarWrapper>
-    )
+    </SearchBarWrapper>
+  );
 }
 
 export const SearchBarWrapper = styled.div`
   display: flex;
-  align-items: start;
+  align-items: center;
+  width: 350px;
+  height: 60px;
   background-color: var(--primary);
-  transform: translateX(20%);`
+  border-radius: 0 55px 55px 0px;
 
-  export const SearchInput = styled.input`
+  transform: translateX(
+    ${({ $isMenuActive }) => ($isMenuActive ? "0%" : "-90%")}
+  );
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+`;
+
+export const SearchInput = styled.input`
   border: 1px solid var(--primary);
   background-color: var(--background-ground);
-  `
+`;
