@@ -46,7 +46,7 @@ export default function SearchBar({
             aria-label="Toggle search"
             onClick={toggleSearch}
           >
-          <Search alt="" width="32" height="32" />
+          <Search alt="search" width={42} height={42} />
         </IconButton>
         </Bar>
       </Viewport>
@@ -61,6 +61,7 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   padding: 12px 0;
+  margin-left: -30px;
 `;
 
 const Viewport = styled.div`
@@ -95,14 +96,38 @@ const SearchInput = styled.input`
   height: 48px;
 
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 3px solid var(--accent);
   padding: 0 16px;
 
   background: var(--background-ground);
    pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
 `;
 
+const IconButton = styled.button`
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  
+  border: none;
+  background: transparent;
 
+  display: grid;
+  place-items: center;
+
+  margin-left: 12px;
+  cursor: pointer;
+
+  svg{
+    fill: var(--background-foreground);
+
+    &:hover{
+      fill: var(--accent);
+
+    }
+
+  
+  }
+`;
 
 const RemoveButton = styled.button`
   height: 48px;
@@ -117,17 +142,4 @@ const RemoveButton = styled.button`
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
 `;
 
-const IconButton = styled.button`
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
 
-  border: none;
-  background: transparent;
-
-  display: grid;
-  place-items: center;
-
-  margin-left: 12px;
-  cursor: pointer;
-`;
