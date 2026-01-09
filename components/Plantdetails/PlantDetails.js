@@ -2,9 +2,13 @@ import { useState } from "react";
 import { getWaterIconSrc, getLightIconSrc } from "../Icons/optionIcons";
 import Image from "next/image";
 
-export default function PlantDetails({ plant, onEdit, onDelete }) {
+export default function PlantDetails({ plant, options, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const lightNeeds = options?.lightNeeds ?? [];
+  const waterNeeds = options?.waterNeeds ?? [];
+  const seasons = options?.fertiliserSeason ?? [];
 
   if (!plant) return null;
 
@@ -20,12 +24,15 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-        await onEdit({
-          id: plant._id,
-          data,
-          file: selectedFile,
-        });
-        
+    const fertiliserSeason = formData.getAll("fertiliserSeason");
+    data.fertiliserSeason = fertiliserSeason;
+
+    await onEdit({
+      id: plant._id,
+      data,
+      file: selectedFile,
+    });
+
     setSelectedFile(null);
     setIsEditing(false);
   }
@@ -65,6 +72,11 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
               )}
               <span>{plant.lightNeed}</span>
             </li>
+
+            <li>
+              Fertiliser season:
+              <span>{plant.fertiliserSeason}</span>
+            </li>
           </ul>
 
           <button type="button" onClick={() => setIsEditing(true)}>
@@ -95,21 +107,41 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
 
           <label>
             Water need
-            <input
-              type="text"
-              name="waterNeed"
-              defaultValue={plant.waterNeed}
-            />
+            <select name="waterNeed" defaultValue={plant.waterNeed} required>
+              {waterNeeds.map((need) => (
+                <option key={need} value={need}>
+                  {need}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label>
             Light need
-            <input
-              type="text"
-              name="lightNeed"
-              defaultValue={plant.lightNeed}
-            />
+            <select name="lightNeed" defaultValue={plant.lightNeed} required>
+              {lightNeeds.map((need) => (
+                <option key={need} value={need}>
+                  {need}
+                </option>
+              ))}
+            </select>
           </label>
+
+          <fieldset>
+            <legend>Fertiliser season</legend>
+
+            {seasons.map((season) => (
+              <label key={season}>
+                <input
+                  type="checkbox"
+                  name="fertiliserSeason"
+                  value={season}
+                  defaultChecked={plant.fertiliserSeason?.includes(season)}
+                />
+                {season}
+              </label>
+            ))}
+          </fieldset>
 
           <button type="submit">Save change</button>
         </form>

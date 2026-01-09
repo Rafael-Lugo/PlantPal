@@ -13,6 +13,8 @@ export default function PlantDetailPage() {
     mutate,
   } = useSWR(id ? `/api/plants/${id}` : null);
 
+  const { data: options } = useSWR("/api/plant-options");
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -35,6 +37,7 @@ export default function PlantDetailPage() {
       description: data.description ?? "",
       waterNeed: data.waterNeed,
       lightNeed: data.lightNeed,
+      fertiliserSeason: data.fertiliserSeason,
     };
 
     Object.keys(updates).forEach((key) => {
@@ -94,7 +97,7 @@ export default function PlantDetailPage() {
   }
   return (
     <>
-      <PlantDetails plant={plant} onEdit={handleEdit} onDelete={handleDelete} />
+      <PlantDetails plant={plant} options={options} onEdit={handleEdit} onDelete={handleDelete} />
     </>
   );
 }
