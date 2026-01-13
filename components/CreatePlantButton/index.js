@@ -6,7 +6,12 @@ export default function CreatePlant() {
   return (
     <ButtonWrapper>
       <ButtonLink href="/create-plant">
-        <Create width={52} height={52} alt="Create Plant" />
+        <Create
+          width={52}
+          height={52}
+          alt="Create Plant"
+          aria-label="Create Plant"
+        />
       </ButtonLink>
     </ButtonWrapper>
   );
