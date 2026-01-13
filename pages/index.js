@@ -3,7 +3,6 @@ import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
 import { Titel } from "@/styles";
-import CreatePlantButton from "components/CreatePlantButton/index.js";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
