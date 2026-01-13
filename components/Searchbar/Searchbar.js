@@ -26,6 +26,7 @@ export default function SearchBar({
     setSearch("");
     inputRef.current?.focus();
   }
+  
 
   return (
     <SearchContainer>
