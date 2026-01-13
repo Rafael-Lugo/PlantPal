@@ -8,7 +8,7 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Failed to Load</p>;
 
-  const favoritePlants = data.filter((plant) =>
+  const favoritePlants = (data ?? []).filter((plant) =>
     favoritePlantIds.includes(plant._id)
   );
 
