@@ -3,6 +3,9 @@ import { useRef } from "react";
 
 import Image from "next/image";
 
+import Search from "public/assets/icons/search.svg";
+import Close from "public/assets/icons/close.svg";
+
 export default function SearchBar({
   search,
   setSearch,
@@ -51,9 +54,9 @@ export default function SearchBar({
             onClick={toggleSearch}
           >
             {isMenuActive ? (
-              <Image src="/assets/icons/close.svg" alt="Close search" width={48} height={48} />
+              <Close alt="Close search" width={48} height={48} />
             ) : (
-              <Image src="/assets/icons/Search.svg" alt="Open search" width={48} height={48} />
+              <Search alt="Open search" width={48} height={48} />
             )}
           </IconButton>
         </Bar>
