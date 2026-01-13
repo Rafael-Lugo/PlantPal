@@ -13,7 +13,7 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
   );
 
   return (
-    <main>
+    <>
       <Titel>My Plants</Titel>
       {favoritePlants.length === 0 ? (
         <Subtitle>no favorites yet</Subtitle>
@@ -24,6 +24,6 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
           toggleFavorite={toggleFavorite}
         />
       )}
-    </main>
+    </>
   );
 }

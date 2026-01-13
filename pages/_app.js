@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <main>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
         <Component
@@ -48,6 +48,6 @@ export default function App({ Component, pageProps }) {
         />
         <Navigation />
       </SWRConfig>
-    </>
+    </main>
   );
 }

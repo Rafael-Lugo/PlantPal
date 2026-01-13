@@ -41,9 +41,9 @@ export default function CreatePlantPage() {
   }
 
   return (
-    <main>
+    <>
       <h1>Create Plant</h1>
       <PlantForm onSubmit={handleCreatePlant} options={options} />
-    </main>
+    </>
   );
 }
