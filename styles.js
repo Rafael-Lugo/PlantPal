@@ -37,7 +37,7 @@ export default createGlobalStyle`
   }
 
   main {
-  padding-bottom: 110px;
+  padding-bottom: 160px;
 }
  
 `;
