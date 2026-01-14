@@ -13,7 +13,7 @@ export const NavigationWrapper = styled.nav`
 
   display: flex;
   justify-content: center;
-  
+
   padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
 
   background: linear-gradient(
@@ -38,6 +38,11 @@ export const NavigationList = styled.ul`
 export const NavigationItem = styled.li`
   text-decoration: none;
   margin: 0;
+
+  & > a[aria-current="page"] {
+    box-shadow: 0px 9px 7px rgba(0, 0, 0, 0.33);
+    transform: translateY(-4px);
+  }
 `;
 
 export const NavigationLink = styled(Link)`
@@ -49,25 +54,24 @@ export const NavigationLink = styled(Link)`
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  
 
   background: var(--primary);
   border-radius: 50px;
 
-  box-shadow: 3px 4px 5px rgba(0, 5, 10, 0.12);
+  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
+  transform: translateY(0);
 
-  transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease;
+  transition: transform 0.09s ease, box-shadow 0.09s ease;
 
-    &:hover {
-      box-shadow: 5px 6px 7px rgba(0, 0, 0, 0.33);
-    }
+  &:hover {
+    box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+  }
 
-    &:active {
-      transform: translateY(3px);
-      box-shadow: 5px 6px 7px rgba(0, 0, 0, 0.33);
-    }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.33);
+  }
 
   svg path {
     fill: ${({ $highlighted }) =>
