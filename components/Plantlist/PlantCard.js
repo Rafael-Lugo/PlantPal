@@ -7,8 +7,8 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
     return null;
   }
 
-const imageSrc =
-  plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
+  const imageSrc =
+    plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
   const title = plant?.name ?? "plant";
 
   return (
@@ -36,6 +36,7 @@ const imageSrc =
 }
 
 export const CardWrapper = styled.article`
+  inset: 0;
   width: 100%;
   max-width: 300px;
   max-height: 400px;
@@ -44,13 +45,27 @@ export const CardWrapper = styled.article`
   position: relative;
   display: block;
   aspect-ratio: 3 / 4;
-  margin: 1rem 3rem;
+  margin: 1rem auto;
+
+  background: transparent;
+  transform: scale(0.97);
+
+  &:hover {
+    background-color: var(--background-ground);
+    border-radius: 25px;
+    box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
+    width: 90%;
+    align-self: center;
+
+    transform: scale(1.1);
+  }
 `;
 
 export const CardLink = styled(Link)`
   display: block;
   text-decoration: none;
   color: inherit;
+  transform: scale(0.97);
 
   &:link,
   &:visited,

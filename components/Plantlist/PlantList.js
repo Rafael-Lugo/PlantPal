@@ -38,6 +38,8 @@ export const PlantListWrapper = styled.ul`
   background: var(--background);
   color: var(--color);
 
+  transform: translateY(0);
+
   @media (min-width: 375px) {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -63,6 +65,8 @@ const PlantListItem = styled.li`
   list-style: none;
   margin: 0;
   padding: 0;
+
+ 
 `;
 
 export const TitelPage = styled.h2`
