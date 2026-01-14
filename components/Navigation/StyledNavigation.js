@@ -5,7 +5,7 @@ export const NavigationWrapper = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
-  right:0;
+  right: 0;
 
   width: 100vw;
   margin: 0 auto;
@@ -13,14 +13,14 @@ export const NavigationWrapper = styled.nav`
 
   display: flex;
   justify-content: center;
-  padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
   
+  padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
+
   background: linear-gradient(
     to top,
     var(--background) 75%,
     rgba(0, 0, 0, 0) 100%
   );
-  
 `;
 
 export const NavigationList = styled.ul`
@@ -32,6 +32,7 @@ export const NavigationList = styled.ul`
   justify-items: center;
   align-self: center;
   list-style: none;
+  gap: 0.5rem;
 `;
 
 export const NavigationItem = styled.li`
@@ -47,14 +48,36 @@ export const NavigationLink = styled(Link)`
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
+  
+
+  background: var(--primary);
+  border-radius: 50px;
+
+  box-shadow: 3px 4px 5px rgba(0, 5, 10, 0.12);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+
+    &:hover {
+      box-shadow: 5px 6px 7px rgba(0, 0, 0, 0.33);
+    }
+
+    &:active {
+      transform: translateY(3px);
+      box-shadow: 5px 6px 7px rgba(0, 0, 0, 0.33);
+    }
 
   svg path {
     fill: ${({ $highlighted }) =>
-      $highlighted ? "var(--accent)" : "var(--primary)"};
+      $highlighted ? "var(--accent)" : "var(--background-foreground)"};
   }
 
   &:hover svg path {
     fill: var(--accent);
+
+    box-shadow: 5px 6px 7px rgba(0, 0, 0, 0.33);
   }
 `;
 

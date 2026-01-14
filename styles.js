@@ -46,10 +46,10 @@ export const Titel = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: 700;
-  `
+`;
 
-  export const Subtitle = styled.h2`
-    text-align: center;
-    font-size: 1.69rem;
-    font-weight: 400;
-  `
+export const Subtitle = styled.h2`
+  text-align: center;
+  font-size: 1.69rem;
+  font-weight: 400;
+`;
