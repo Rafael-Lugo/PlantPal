@@ -46,12 +46,12 @@ export const ContentCard = styled.section`
 
 export const ImageWrapper = styled.div`
   position: relative;
-  width: 50%;
+  width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: 22px;
   overflow: hidden;
 
-  right: 1rem;
+  right: 2rem;
 
   box-shadow: 0px 10px 18px rgba(0, 5, 10, 0.18);
 `;
@@ -64,6 +64,6 @@ export const TextWrapper = styled.div`
 
   p{
     margin: 0;
-    line-height: 1.35;
+    
   }
 `;
