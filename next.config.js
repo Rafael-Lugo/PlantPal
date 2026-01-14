@@ -1,24 +1,13 @@
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: {
-    styledComponents: true,
-  },
-  reactStrictMode: true,
-
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
-      },
-    ],
-  },
-
   webpack(config) {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      public: path.resolve(__dirname, "public"),
+    };
+
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,

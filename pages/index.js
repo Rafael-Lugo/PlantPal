@@ -2,8 +2,7 @@ import PlantList from "@/components/Plantlist/PlantList";
 import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
-import { Titel } from "@/styles";
-import CreatePlantButton from "components/CreatePlantButton/index.js";
+import { Titel, Subtitle } from "@/styles";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -19,21 +18,24 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
 
   return (
     <>
-      <Titel>Plantpal App</Titel>
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-        isMenuActive={isMenuActive}
-        setIsMenuActive={setIsMenuActive}
-      />
+    <Titel>Plantpal App</Titel>
 
-      <CreatePlantButton />
+    <SearchBar
+      search={search}
+      setSearch={setSearch}
+      isMenuActive={isMenuActive}
+      setIsMenuActive={setIsMenuActive}
+    />
 
+    {search && filterPlants?.length === 0 ? (
+      <Subtitle>No plants found</Subtitle>
+    ) : (
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}
         toggleFavorite={toggleFavorite}
       />
-    </>
+    )}
+  </>
   );
 }

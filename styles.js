@@ -16,7 +16,7 @@ export default createGlobalStyle`
    :root{
     --background: #FCFBEC;
     --background-foreground: #b2d024;
-    --background-ground: #fdfdf9ff;
+    --background-ground: #FFFFFF;
     --color: #003333;
     --primary: #5F7B02;
     --accent: #14ddce;
@@ -24,14 +24,21 @@ export default createGlobalStyle`
     --terciary: #99CC99
   }
 
-   body {
+   html, body {
     margin: 0;
     padding: 0 0px 0;
+    overflow-x: hidden;
+
+
     font-family: ${exo.style.fontFamily};
     
     background: var(--background);
     color: var(--color);
   }
+
+  main {
+  padding-bottom: 160px;
+}
  
 `;
 
@@ -39,10 +46,10 @@ export const Titel = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: 700;
-  `
+`;
 
-  export const Subtitle = styled.h2`
-    text-align: center;
-    font-size: 1.69rem;
-    font-weight: 400;
-  `
+export const Subtitle = styled.h2`
+  text-align: center;
+  font-size: 1.69rem;
+  font-weight: 400;
+`;

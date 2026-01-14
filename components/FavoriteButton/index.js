@@ -25,10 +25,17 @@ export const FavoriteButtonWrapper = styled.button`
   svg {
     fill: ${({ $isFavorite }) => ($isFavorite ? "var(--accent)" : "var(--terciary)")};
     transition: fill 0.2s ease, stroke 0.2s ease;
-    
+    transform: translateY(0);    
   }
 
-  &:hover svg path {
-    fill: var(--accent);
+  &:hover svg {
+    fill: var(--background-foreground);
+    transform: translateY(-1px);
+    transition: fill 0.2s ease, stroke 0.2s ease;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    transition: fill 0.2s ease, stroke 0.2s ease;
   }
   `
