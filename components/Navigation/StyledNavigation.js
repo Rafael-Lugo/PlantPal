@@ -14,7 +14,8 @@ export const NavigationWrapper = styled.nav`
   display: flex;
   justify-content: center;
 
-  padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  min-height: 150px;
+  padding: 3.2rem 0 calc(1rem + env(safe-area-inset-bottom));
 
   background: linear-gradient(
     to top,

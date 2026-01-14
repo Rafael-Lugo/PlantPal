@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useRef } from "react";
 
-import Image from "next/image";
-
 import Search from "public/assets/icons/search.svg";
 import Close from "public/assets/icons/close.svg";
 
@@ -18,7 +16,7 @@ export default function SearchBar({
     setIsMenuActive((prev) => !prev);
   }
 
-  function handleSearch(event){
+  function handleSearch(event) {
     setSearch(event.target.value.toLowerCase());
   }
 
@@ -26,7 +24,6 @@ export default function SearchBar({
     setSearch("");
     inputRef.current?.focus();
   }
-  
 
   return (
     <SearchContainer>
@@ -68,17 +65,24 @@ export default function SearchBar({
 
 const CLOSED_VISIBLE = 64;
 
+
 const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  padding: 12px 0;
-  margin-left: -30px;
+  padding: 12px;
+  overflow: hidden;
+
+  transform: ${({ $isOpen }) => ($isOpen ? "translateX(0)" : "translateX(-30px)")};
+  transition: transform 0.35s ease;
 `;
 
 const Viewport = styled.div`
   width: 100%;
   overflow: hidden;
+
+  padding: 0 12px;
+  box-sizing: border-box;
 `;
 
 const Bar = styled.div`
@@ -87,10 +91,10 @@ const Bar = styled.div`
 
   height: 64px;
   max-width: 680px;
-  width: min(680px, 100%);
+  width: min(100%, 360px);
 
   background: var(--primary);
-  border-radius: 999px;
+  border-radius: 0 50px 50px 0;
   padding: 8px;
 
   transform: ${({ $isOpen }) =>
@@ -105,10 +109,12 @@ const Bar = styled.div`
 const SearchInput = styled.input`
   flex: 1;
   height: 48px;
+  min-width: 0;
 
   border-radius: 999px;
   border: 3px solid var(--accent);
-  padding: 0 16px;
+  padding: 0 10px;
+  margin-left: 10px;
 
   background: var(--background-ground);
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
@@ -128,21 +134,18 @@ const IconButton = styled.button`
   margin-left: 12px;
   cursor: pointer;
 
+  color: var(--background-foreground);
+
   svg {
-    fill: var(--background-foreground);
+    display: block;
+    width: 48px;
+    height: 48px;
 
     &:hover {
-      fill: var(--accent);
+      color: var(--accent);
     }
   }
 
-  svg path {
-    fill: var(--background-foreground);
-
-    &:hover {
-      fill: var(--accent);
-    }
-  }
 `;
 
 const RemoveButton = styled.button`
@@ -153,8 +156,22 @@ const RemoveButton = styled.button`
 
   color: var(--background-foreground);
   background: var(--color);
+  transform: translateY(0);
 
   margin-left: 12px;
 
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
+
+  &:hover{
+    background: var(--background-foreground);
+    color: var(--color);
+
+    box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.25);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.33);
+  }
+
 `;
