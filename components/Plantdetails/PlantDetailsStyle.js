@@ -37,23 +37,34 @@ export const ContentCard = styled.section`
   }
 
   @media (max-width: 360px) {
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 130px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 36px;
   }
 `;
 
 export const ImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 2 / 4;
+  position: absolute;
+  align-content: start;
+  width: 50%;
+  aspect-ratio: 3 / 4;
   border-radius: 22px;
   overflow: hidden;
+
+  right: 1rem;
 
   box-shadow: 0px 10px 18px rgba(0, 5, 10, 0.18);
 `;
 
 export const TextWrapper = styled.div`
   display: grid;
-  align-content: start;
+  align-content: end;
   gap: 0.75rem;
   min-width: 0;
+
+  p{
+    margin: 0;
+    line-height: 1.35;
+  }
 `;
