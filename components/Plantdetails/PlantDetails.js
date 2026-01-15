@@ -6,6 +6,7 @@ import {
 } from "../Icons/optionIcons";
 import Image from "next/image";
 import {
+  ActionBar,
   ContenLabel,
   ContentCard,
   ContentIcons,
@@ -20,6 +21,7 @@ import {
   TextWrapper,
   TitelPage,
 } from "./PlantDetailsStyle";
+import { ButtonInput, ButtonWrapper, DeleteButton } from "../Button/ButtonStyle";
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -146,13 +148,17 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
             </ContentItem>
           </ContentWrapper>
 
-          <button type="button" onClick={() => setIsEditing(true)}>
-            Edit
-          </button>
+          <ActionBar>
 
-          <button type="button" onClick={() => onDelete(plant._id)}>
+          <ButtonInput type="button" aria-label="edit button" onClick={() => setIsEditing(true)}>
+            Edit
+          </ButtonInput>
+
+          <DeleteButton type="button" aria-label="delete button" onClick={() => onDelete(plant._id)}>
             Delete
-          </button>
+          </DeleteButton>
+
+          </ActionBar>
         </>
       ) : (
         <form onSubmit={handleSubmit}>

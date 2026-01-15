@@ -21,7 +21,9 @@ export default createGlobalStyle`
     --primary: #5F7B02;
     --accent: #14ddce;
     --secondary: #096830;
-    --terciary: #99CC99
+    --terciary: #99CC99;
+    --alert: #AA2929;
+    --alert-secondary: #651B1B;
   }
 
    html, body {
