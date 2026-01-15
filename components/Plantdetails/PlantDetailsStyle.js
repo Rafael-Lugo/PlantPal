@@ -71,39 +71,38 @@ export const ContentWrapper = styled.ul`
   display: grid;
   list-style: none;
 
-  width: min(980px, calc(100% - 2rem));
   margin: 1.25rem auto 0;
   padding: 0;
-  gap: 1.1rem;
+  gap: 1.25rem;
 
   justify-items: center;
 `;
 
 export const ContentItem = styled.li`
   display: grid;
-  width: min(860px, calc(100% - 2rem));
+  width: min(860px, calc(100% - 2.5rem));
   border-radius: 36px;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
 
   background: var(--background-ground);
 
-  padding: 0.95rem 1.1rem;
-  gap: 0.9rem;
+  padding: 0.95rem 1.4rem;
+  gap: 0.75rem;
 
   box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
 
-  @media (min-width: 768px) {
-    width: min(900px, calc(100% - 4rem));
+  @media (max-width: 420px) {
+    width: min(820px, calc(100% - 1.75rem));
+    padding: 0.85rem 1.1rem;
   }
 
   & > span {
-    justify-self: center;
     display: grid;
     place-items: center;
   }
 
-  & > span img {
+  & img {
     display: block;
   }
 `;
@@ -132,4 +131,44 @@ export const ContenLabel = styled.span`
   @media (max-width: 420px) {
     font-size: 1.1rem;
   }
+`;
+
+export const ContentIcons = styled.span`
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.75rem;
+  min-width: 10rem;
+`;
+
+export const IconItem = styled.span`
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & img {
+    display: block;
+    object-fit: contain;
+  }
+`;
+
+export const IconWithLabel = styled.span`
+  display: grid;
+  grid-template-columns: 32px auto;
+  align-items: center;
+  column-gap: 0.75rem;
+  width: 100%;
+`;
+
+export const IconLabel = styled.span`
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color);
+  line-height: 1;
+  white-space: nowrap;
 `;

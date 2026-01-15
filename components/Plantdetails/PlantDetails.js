@@ -8,15 +8,17 @@ import Image from "next/image";
 import {
   ContenLabel,
   ContentCard,
+  ContentIcons,
   ContentItem,
   ContentText,
   ContentWrapper,
+  IconItem,
+  IconLabel,
+  IconWithLabel,
   ImageWrapper,
   SubtitlePage,
   TextWrapper,
-  Titel,
   TitelPage,
-  Titelpage,
 } from "./PlantDetailsStyle";
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
@@ -91,7 +93,8 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
           <ContentWrapper>
             <ContentItem>
-              <ContentText>Water needs:</ContentText>              
+              <ContentText>Water needs:</ContentText>
+
               {water_Icon && (
                 <Image
                   src={water_Icon}
@@ -100,11 +103,12 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                   height={32}
                 />
               )}
+
               <ContenLabel>{plant.waterNeed}</ContenLabel>
             </ContentItem>
 
-            <li>
-              Light needs:
+            <ContentItem>
+              <ContentText>Light needs:</ContentText>
               {light_Icon && (
                 <Image
                   src={light_Icon}
@@ -113,29 +117,33 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                   height={32}
                 />
               )}
-              <span>{plant.lightNeed}</span>
-            </li>
+              <ContenLabel>{plant.lightNeed}</ContenLabel>
+            </ContentItem>
 
-            <li>
-              Fertiliser season:
-              <div>
-                {fertiliserIcons.length ? (
+            <ContentItem>
+              <ContentText>Fertiliser season:</ContentText>
+
+              <ContentIcons>
+                {fertiliserIcons.length > 0 ? (
                   fertiliserIcons.map(({ season, src }) => (
-                    <span key={season}>
-                      <Image
-                        src={src}
-                        alt={`Fertiliser: ${season}`}
-                        width={32}
-                        height={32}
-                      />
-                    </span>
+                    <IconWithLabel key={season}>
+                      <IconItem>
+                        <Image
+                          src={src}
+                          alt={`Fertiliser: ${season}`}
+                          width={32}
+                          height={32}
+                        />
+                      </IconItem>
+                      <IconLabel>{season}</IconLabel>
+                    </IconWithLabel>
                   ))
                 ) : (
-                  <span>-</span>
+                  <IconWithLabel aria-hidden />
                 )}
-              </div>
-              <span>{plant.fertiliserSeason}</span>
-            </li>
+              </ContentIcons>
+              <ContenLabel aria-hidden />
+            </ContentItem>
           </ContentWrapper>
 
           <button type="button" onClick={() => setIsEditing(true)}>
