@@ -163,8 +163,8 @@ const RemoveButton = styled.button`
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
 
   &:hover{
-    background: var(--background-foreground);
     color: var(--color);
+    background: var(--background-foreground);
 
     box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.25);
   }

@@ -24,7 +24,7 @@ export const ContentCard = styled.section`
   border-radius: 36px;
   padding: 1.25rem;
 
-  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
+  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.1);
 
   align-items: start;
   width: min(980px, calc(100% - 2rem));
@@ -48,12 +48,12 @@ export const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  border-radius: 22px;
+  border-radius: 25px;
   overflow: hidden;
 
-  right: 1.5rem;
+  right: 0.5rem;
 
-  box-shadow: 0px 10px 18px rgba(0, 5, 10, 0.18);
+  box-shadow: 0px 8px 10px rgba(0, 5, 10, 0.25);
 `;
 
 export const TextWrapper = styled.div`
@@ -81,7 +81,7 @@ export const ContentWrapper = styled.ul`
 export const ContentItem = styled.li`
   display: grid;
   width: min(860px, calc(100% - 2.5rem));
-  border-radius: 36px;
+  border-radius: 25px;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
 
@@ -90,7 +90,7 @@ export const ContentItem = styled.li`
   padding: 0.95rem 1.4rem;
   gap: 0.75rem;
 
-  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
+  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.1);
 
   @media (max-width: 420px) {
     width: min(820px, calc(100% - 1.75rem));
@@ -120,7 +120,7 @@ export const ContentText = styled.span`
 `;
 
 export const ContenLabel = styled.span`
-  justify-self: end;
+  justify-self: start;
   text-align: right;
 
   font-size: 1.25rem;
@@ -171,4 +171,13 @@ export const IconLabel = styled.span`
   color: var(--color);
   line-height: 1;
   white-space: nowrap;
+`;
+
+export const ActionBar = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  width: min(860px, calc(100% - 2.5rem));
+  margin: 2rem auto 0;
 `;
