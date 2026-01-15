@@ -5,7 +5,7 @@ export const ButtonInput = styled.button`
   cursor: pointer;
   align-content: center;
   align-items: center;
-  
+
   height: 35px;
   width: 60px;
   border-radius: 16px;
@@ -28,7 +28,6 @@ export const ButtonInput = styled.button`
   &:active {
     color: var(--background-foreground);
     background: var(--secondary);
-
 
     transform: translateY(1px);
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.33);
@@ -54,6 +53,10 @@ export const DeleteButton = styled.button`
   transform: translateY(0px);
   transition: transform 0.3s ease;
 
+  svg {
+    fill: var(--background-foreground);
+  }
+
   &:hover {
     color: var(--background);
     background: var(--alert);
@@ -61,6 +64,10 @@ export const DeleteButton = styled.button`
     box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.25);
     transform: translateY(-2px);
     transition: transform 0.3s ease;
+
+    svg {
+      fill: var(--background);
+    }
   }
 
   &:active {
@@ -70,5 +77,9 @@ export const DeleteButton = styled.button`
     transform: translateY(2px);
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.33);
     transition: transform 0.3s ease;
+
+    svg {
+      fill: var(--background);
+    }
   }
 `;

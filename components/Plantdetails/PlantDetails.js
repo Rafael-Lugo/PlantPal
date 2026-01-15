@@ -21,7 +21,9 @@ import {
   TextWrapper,
   TitelPage,
 } from "./PlantDetailsStyle";
-import { ButtonInput, ButtonWrapper, DeleteButton } from "../Button/ButtonStyle";
+import { ButtonInput, DeleteButton } from "../Button/ButtonStyle";
+
+import Delete from "/public/assets/icons/delete.svg"
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -155,7 +157,7 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
           </ButtonInput>
 
           <DeleteButton type="button" aria-label="delete button" onClick={() => onDelete(plant._id)}>
-            Delete
+            <Delete alt="delete" width={48} height={48} />
           </DeleteButton>
 
           </ActionBar>
