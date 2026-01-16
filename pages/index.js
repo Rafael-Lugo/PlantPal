@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
 import { Titel, Subtitle } from "@/styles";
+import { Leaf } from "@/components/Navigation/StyledNavigation";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -36,6 +37,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
         toggleFavorite={toggleFavorite}
       />
     )}
+   
   </>
   );
 }

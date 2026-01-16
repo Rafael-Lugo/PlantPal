@@ -56,3 +56,8 @@ export const Subtitle = styled.h2`
   font-size: 1.69rem;
   font-weight: 400;
 `;
+
+export const AppShell = styled.main`
+  position: relative;
+  z-index: 1; 
+`;
