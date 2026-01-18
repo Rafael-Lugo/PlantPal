@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton";
 import styled from "styled-components";
+import Image from "next/image";
 
 export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
   if (!plant) {
@@ -21,7 +22,7 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
       </BookmarkWrapper>
       <CardLink href={`/plants/${plant._id}`}>
         <CardImageWrapper>
-          <CardImage src={imageSrc} alt={title} />
+          <Image src={imageSrc} alt={title} fill sizes="(max-width: 520px) 92vw, (max-width: 900px) 45vw, 300px" style={{objectFit: "cover"}} loading="lazy"/>
         </CardImageWrapper>
 
         <CardContent>
@@ -86,15 +87,6 @@ export const CardImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 25px;
-`;
-
-export const CardImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  object-fit: cover;
-  object-position: center;
 `;
 
 export const CardContent = styled.div`

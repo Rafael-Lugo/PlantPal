@@ -50,6 +50,7 @@ export const ImageWrapper = styled.div`
   aspect-ratio: 16 / 9;
   border-radius: 22px;
   overflow: hidden;
+  align-items: center;
 
   right: 0.5rem;
 
