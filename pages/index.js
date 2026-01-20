@@ -24,7 +24,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
         <AppIconWrapper>
           <Logo />
         </AppIconWrapper>
-        <Titel>Plantpal</Titel>
+        <Titel>PocketPlants</Titel>
       </HeaderWrapper>
 
       <SearchBar
