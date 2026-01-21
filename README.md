@@ -1,4 +1,4 @@
-# 🌱 PocketPlants (plantpal app)
+# 🌱 PocketPlantsApp
 
 **PocketPlants** is a full-stack plant management web application built with **Next.js**.
 It helps users keep track of important plant care information such as **watering needs**, **fertilizing seasons**, and **light requirements**, all in one intuitive and visually guided interface.
@@ -203,7 +203,7 @@ Push to GitHub and connect the repository to Vercel.
 ## 👤 Author
 
 **Rafael Lugo**
-PocketPlants (plantpal app)
+PocketPlants app
 Fullstack Next.js project with focus on **UX, component architecture, and clean code**.
 
 ## License
