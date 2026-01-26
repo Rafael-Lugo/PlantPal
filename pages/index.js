@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
 import { Titel, Subtitle, HeaderWrapper, AppIconWrapper } from "@/styles";
+import Login from "@/components/Login";
 
 import Logo from "@/public/assets/icons/plantpal-icon.svg";
 
@@ -20,7 +21,9 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
 
   return (
     <>
+    <Login />
       <HeaderWrapper>
+        
         <AppIconWrapper>
           <Logo />
         </AppIconWrapper>
