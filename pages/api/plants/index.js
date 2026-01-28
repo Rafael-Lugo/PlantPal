@@ -1,15 +1,19 @@
 import dbConnect from "@/db/connect";
 import Plant from "/db/models/Plant";
+import { requireAuth } from "../_lib/requireAuth";
 
 export default async function handler(request, response) {
   await dbConnect();
 
-  if (request.method === "GET") {
+   if (request.method === "GET") {
     const plants = await Plant.find().sort({ _id: -1 });
     return response.status(200).json(plants);
   }
 
   if (request.method === "POST") {
+    const session = await requireAuth(request, response);
+    if (!session) return;
+    
     try {
       const plantData = request.body;
 
