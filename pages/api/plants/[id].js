@@ -1,8 +1,10 @@
 import dbConnect from "@/db/connect";
 import Plant from "@/db/models/Plant";
+import { requireAuth } from "../_lib/requireAuth";
 
 export default async function handler(request, response) {
   await dbConnect();
+
   const { id } = request.query;
 
   if (request.method === "GET") {
@@ -13,6 +15,11 @@ export default async function handler(request, response) {
     }
     response.status(200).json(plant);
     return;
+  }
+
+   if (request.method === "DELETE" || request.method === "PUT" || request.method === "PATCH") {
+    const session = await requireAuth(request, response);
+    if (!session) return;
   }
 
   if (request.method === "DELETE") {

@@ -8,13 +8,32 @@ import {
   SuccessOverlay,
 } from "@/components/PlantForm/PlantFormStyled";
 
+import { useSession, signIn } from "next-auth/react";
+
 export default function CreatePlantPage() {
   const router = useRouter();
+  const { status } = useSession();
+
   const { mutate } = useSWR("/api/plants");
   const { data: options, isLoading: optionsLoading } =
     useSWR("/api/plant-options");
 
   const [successMessage, setSuccesMessage] = useState("");
+
+  if (status === "loading") {
+    return <p>Loading session...</p>;
+  }
+  if (status === "unauthenticated") {
+    return (
+      <>
+        <Titel>Create Plant </Titel>
+        <p>Acces denied. Please sign in to create a plant.</p>
+        {/* <button type="button" onClick={() => signIn("github")}>
+          Sign in with GitHub
+        </button> */}
+      </>
+    );
+  }
 
   async function handleCreatePlant(plantData) {
     try {
@@ -23,6 +42,11 @@ export default function CreatePlantPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(plantData),
       });
+
+      if (response.status === 401) {
+        alert("Please sign in to create a plant.");
+        return;
+      }
 
       if (!response.ok) {
         let errorData = {};

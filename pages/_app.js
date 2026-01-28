@@ -3,12 +3,17 @@ import GlobalStyle, { AppShell } from "../styles";
 import { SWRConfig } from "swr";
 import { useState, useEffect } from "react";
 import { Leaf } from "@/components/Navigation/StyledNavigation";
+import { SessionProvider } from "next-auth/react";
+import Login from "@/components/Login";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 const STORANGE_KEY = "favoritePlantIds";
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const [favoritePlantIds, setFavoritePlantIds] = useState([]);
   const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false);
 
@@ -39,22 +44,25 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <main>
-      <GlobalStyle />
-      <Leaf
-        style={{ left: "-55px", top: "-55px", transform: "rotate(180deg)" }}
-      />
+    <SessionProvider session={session}>
+      <main>
+        <GlobalStyle />
+        <Leaf
+          style={{ left: "-55px", top: "-55px", transform: "rotate(180deg)" }}
+        />
+        <Login />
 
-      <AppShell>
-        <SWRConfig value={{ fetcher }}>
-          <Component
-            {...pageProps}
-            toggleFavorite={toggleFavorite}
-            favoritePlantIds={favoritePlantIds}
-          />
-          <Navigation />
-        </SWRConfig>
-      </AppShell>
-    </main>
+        <AppShell>
+          <SWRConfig value={{ fetcher }}>
+            <Component
+              {...pageProps}
+              toggleFavorite={toggleFavorite}
+              favoritePlantIds={favoritePlantIds}
+            />
+            <Navigation />
+          </SWRConfig>
+        </AppShell>
+      </main>
+    </SessionProvider>
   );
 }

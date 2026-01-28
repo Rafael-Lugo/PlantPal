@@ -1,15 +1,40 @@
 import dbConnect from "@/db/connect";
-import Plant from "/db/models/Plant";
+import Plant from "@/db/models/Plant";
+import { requireAuth } from "../_lib/requireAuth";
+import { getToken } from "next-auth/jwt";
 
 export default async function handler(request, response) {
   await dbConnect();
+  // await Plant.updateMany({ owner: { $exists: false } }, { $set: { owner: "default" } });
 
-  if (request.method === "GET") {
-    const plants = await Plant.find().sort({ _id: -1 });
+
+   if (request.method === "GET") {
+    const token = await getToken({ req: request });
+    const userId = token?.sub || null;
+
+    const publicFilter = {
+    $or: [{ owner: "default" }, { owner: { $exists: false } }],
+  };
+
+    const filter = userId
+    ? { $or: [{ owner: userId }, ...publicFilter.$or] }
+    : publicFilter;
+
+    const plants = await Plant.find(filter).sort({ _id: -1 });
     return response.status(200).json(plants);
   }
 
   if (request.method === "POST") {
+    const session = await requireAuth(request, response);
+    if (!session) return;
+
+    const token = await getToken({ req: request });
+    const userId = token?.sub;
+
+    if (!userId) {
+      return response.status(401).json({ message: "Not authorized" });
+    }
+    
     try {
       const plantData = request.body;
 
@@ -29,8 +54,8 @@ export default async function handler(request, response) {
     ) {
       plantData.imageUrl = PLACEHOLDER_IMAGE;
     }
-    
-      await Plant.create(plantData);
+
+      await Plant.create({ ...plantData, owner: userId });
 
       response.status(201).json({ message: "Plant created successfully" });
     } catch (error) {
