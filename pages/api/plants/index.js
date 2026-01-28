@@ -5,20 +5,18 @@ import { getToken } from "next-auth/jwt";
 
 export default async function handler(request, response) {
   await dbConnect();
-  // await Plant.updateMany({ owner: { $exists: false } }, { $set: { owner: "default" } });
 
-
-   if (request.method === "GET") {
+  if (request.method === "GET") {
     const token = await getToken({ req: request });
     const userId = token?.sub || null;
 
     const publicFilter = {
-    $or: [{ owner: "default" }, { owner: { $exists: false } }],
-  };
+      $or: [{ owner: "default" }, { owner: { $exists: false } }],
+    };
 
     const filter = userId
-    ? { $or: [{ owner: userId }, ...publicFilter.$or] }
-    : publicFilter;
+      ? { $or: [{ owner: userId }, ...publicFilter.$or] }
+      : publicFilter;
 
     const plants = await Plant.find(filter).sort({ _id: -1 });
     return response.status(200).json(plants);
@@ -34,26 +32,26 @@ export default async function handler(request, response) {
     if (!userId) {
       return response.status(401).json({ message: "Not authorized" });
     }
-    
+
     try {
       const plantData = request.body;
 
       const PLACEHOLDER_IMAGE = {
-      url: "/images/plant-placeholder.png",
-      width: "600",
-      height: "600",
-      public_id: "placeholder",
-    };
+        url: "/images/plant-placeholder.png",
+        width: "600",
+        height: "600",
+        public_id: "placeholder",
+      };
 
-    if (
-      !plantData.imageUrl ||
-      !plantData.imageUrl.url ||
-      !plantData.imageUrl.width ||
-      !plantData.imageUrl.height ||
-      !plantData.imageUrl.public_id
-    ) {
-      plantData.imageUrl = PLACEHOLDER_IMAGE;
-    }
+      if (
+        !plantData.imageUrl ||
+        !plantData.imageUrl.url ||
+        !plantData.imageUrl.width ||
+        !plantData.imageUrl.height ||
+        !plantData.imageUrl.public_id
+      ) {
+        plantData.imageUrl = PLACEHOLDER_IMAGE;
+      }
 
       await Plant.create({ ...plantData, owner: userId });
 
