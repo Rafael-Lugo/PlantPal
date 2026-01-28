@@ -1,4 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import LoginForm from "./LoginForm";
+
 
 export default function Login() {
   const { data: session, status } = useSession();
@@ -20,10 +22,17 @@ export default function Login() {
 
   return (
     <div>
-      Not signed in
+      <p>Not signed in</p>
+
       <button type="button" onClick={() => signIn("github")}>
         Sign in with GitHub
       </button>
+
+      <hr/>
+
+      <LoginForm />
+
+
     </div>
   );
 }

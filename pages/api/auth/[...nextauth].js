@@ -17,19 +17,19 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
 
       async authorize(credentials) {
-        const email = credentials?.email?.toLowerCase();
+        const email = credentials?.email?.toLowerCase().trim();
         const password = credentials?.password;
 
         if (!email || !password) return null;
 
         await dbConnect();
-        const user = await User.findOne({ email });
 
+        const user = await User.findOne({ email });
         if (!user || !user.passwordHash) return null;
 
         const ok = await bcrypt.compare(password, user.passwordHash);
@@ -51,17 +51,20 @@ export const authOptions = {
 
       if (account?.provider === "github" && token?.email) {
         await dbConnect();
-        const email = token.email.toLowerCase();
+
+        const email = token.email.toLowerCase().trim();
+
+        const updateFields = {};
+        if (token?.name) updateFields.name = token.name;
+        if (token?.picture) updateFields.image = token.picture;
 
         await User.updateOne(
           { email },
           {
             $setOnInsert: { email, provider: "github" },
-            $set: {
-              name: token.name || "",
-              image: token.picture || "",
-            },
+            ...(Object.keys(updateFields).length ? { $set: updateFields } : {}),
           },
+
           { upsert: true }
         );
 

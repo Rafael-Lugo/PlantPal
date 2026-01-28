@@ -1,44 +1,46 @@
+import bcrypt from "bcrypt";
 import dbConnect from "@/db/connect";
 import User from "@/db/models/User";
-import bcrypt from "bcrypt";
 
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     return response.status(405).json({ message: "Method not allowed" });
   }
 
-  const { email, password, name } = request.body || {};
+  const { email, password, name } = request.body;
 
-  if (!email || !password) {
+  const normalizedEmail = String(email || "")
+    .toLowerCase()
+    .trim();
+  const plainPassword = String(password || "");
+
+  if (!normalizedEmail || !plainPassword) {
     return response
       .status(400)
-      .json({ message: "Email and password are required." });
+      .json({ message: "Email and password are required" });
   }
 
-  if (password.length < 8) {
+  if (plainPassword.length < 8) {
     return response
       .status(400)
-      .json({ message: "Password must be at least 8 characters." });
+      .json({ message: "Password must be at least 8 characters" });
   }
 
   await dbConnect();
 
-  const existing = await User.findOne({ email: email.toLowerCase() });
+  const existing = await User.findOne({ email: normalizedEmail });
   if (existing) {
-    return response.status(409).json({ message: "User already exists." });
+    return response.status(409).json({ message: "Email already exists" });
   }
 
-  const passwordHash = await bcrypt.hash(password, 12);
+  const passwordHash = await bcrypt.hash(plainPassword, 12);
 
-  const user = await User.create({
-    email: email.toLowerCase(),
+  await User.create({
+    email: normalizedEmail,
     passwordHash,
-    name: name || "",
+    name: name ? String(name).trim() : "",
     provider: "credentials",
   });
 
-  return response.status(201).json({
-    message: "User created",
-    user: { id: user._id.toString(), email: user.email, name: user.name },
-  });
+  return response.status(201).json({ message: "User created" });
 }

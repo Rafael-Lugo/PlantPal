@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 import { useState, useEffect } from "react";
 import { Leaf } from "@/components/Navigation/StyledNavigation";
 import { SessionProvider } from "next-auth/react";
-import Login from "@/components/Login";
+import Login from "@/components/auth/Login";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
