@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 import { useState, useEffect } from "react";
 import { Leaf } from "@/components/Navigation/StyledNavigation";
 import { SessionProvider } from "next-auth/react";
-import Login from "@/components/Login";
+import AuthBar from "@/components/auth/AuthBar";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -16,6 +16,8 @@ export default function App({
 }) {
   const [favoritePlantIds, setFavoritePlantIds] = useState([]);
   const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false);
+
+  const [authBarHeight, setAuthBarHeight] = useState(0);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORANGE_KEY);
@@ -44,14 +46,13 @@ export default function App({
   }
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
+      <AuthBar onHeightChange={setAuthBarHeight}/>
       <main>
         <GlobalStyle />
         <Leaf
           style={{ left: "-55px", top: "-55px", transform: "rotate(180deg)" }}
         />
-        <Login />
-
         <AppShell>
           <SWRConfig value={{ fetcher }}>
             <Component
