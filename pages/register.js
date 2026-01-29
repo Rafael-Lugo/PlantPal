@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { ButtonRow, ErrorText, Form, FormGroup, PageTitle, PageWrapper, SubmitButton } from "@/components/Styled/RegisterStyle";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -75,43 +76,40 @@ export default function RegisterPage() {
   }
 
   return (
-    <main style={{ padding: 16 }}>
-      <h1>Register</h1>
+    <PageWrapper>
+      <PageTitle>Register</PageTitle>
 
-      <form onSubmit={onSubmit}>
-        <label>
+      <Form onSubmit={onSubmit}>
+        <FormGroup>
           Name
           <input value={formState.name} onChange={handleNameChange} />
-        </label>
+        </FormGroup>
 
-        <br />
-
-        <label>
+        <FormGroup>
           Email
           <input
             type="email"
             value={formState.email}
             onChange={handleEmailChange}
           />
-        </label>
+        </FormGroup>
 
-        <br />
-
-        <label>
+        <FormGroup>
           Password (min 8)
           <input
             type="password"
             value={formState.password}
             onChange={handlePasswordChange}
           />
-        </label>
+        </FormGroup>
 
-        <br />
+        
+        {errorMessage ? <ErrorText style={{ color: "red" }}>{errorMessage}</ErrorText> : null}
 
-        {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
-
-        <button type="submit">Create account</button>
-      </form>
-    </main>
+       <ButtonRow>
+       <SubmitButton type="submit">Create account</SubmitButton>
+       </ButtonRow>
+      </Form>
+    </PageWrapper>
   );
 }
